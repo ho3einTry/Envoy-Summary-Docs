@@ -1,0 +1,25 @@
+Connection pooling:
+	1.HTTP/1.1:
+		only a single downstream request must be reset 
+		if the upstream connection is severed
+	2.HTTP/2:
+		The HTTP/2 connection pool multiplexes multiple requests over a single connection, 
+		up to the limits imposed by "max concurrent streams" and "max requests per connection"
+		=>"maximum requests per connection","maximum concurrent stream limit"
+	3.HTTP/3: Like HTTP/2
+
+Automatic protocol selection:
+For Envoy acting as a forward proxy, the preferred configuration is the AutoHttpConfig
+=>"<envoy_v3_api_msg_extensions.upstreams.http.v3.HttpProtocolOptions.AutoHttpConfig>"
+=>"<envoy_v3_api_msg_extensions.upstreams.http.v3.HttpProtocolOptions>"
+
+
+Number of connection pools:
+
+if the cluster supports multiple upstream protocols, 
+then unless it is using ALPN, 
+one connection pool per protocol may be allocated.
+
+Each worker thread maintains its own connection pools for each cluster, 
+so if an Envoy has two threads and a cluster with both HTTP/1 and HTTP/2 support, 
+there will be at least 4 connection pools.

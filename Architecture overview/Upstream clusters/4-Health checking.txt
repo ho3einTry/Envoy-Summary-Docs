@@ -1,0 +1,33 @@
+Health checking : 
+	1.HTTP
+	2.L3/L4
+	3.Redis
+
+Health check event logging می تونی
+
+HTTP health checking filter:
+	1.No pass through, No pass through
+	2.computed from upstream cluster health
+	3.Pass through
+	4.Pass through with caching(Recommended)
+
+
+Active health checking fast failure:
+This can be done by placing "x-envoy-immediate-health-check-fail" header
+
+
+Health check identity:
+This can be done by compare  the value of the 
+	"x-envoy-upstream-healthchecked-cluster" response header 
+	to "service_name_matcher" option value
+
+
+Degraded health:
+	=> header value "x-envoy-degraded"
+Envoy supports marking certain endpoints as degraded, 
+meaning that they are able to receive traffic, 
+but should only receive traffic once 
+there are not sufficient healthy hosts available.
+
+
+

@@ -1,0 +1,12 @@
+Load Balancing:
+	1.Distributed Load Balancing:
+	Examples:
+		1.Active health checking
+		2.Zone aware routing
+		3.Load balancing algorithms
+	2.Global Load Balancing
+	Global load balancing refers to having a single, global authority that decides how load should be distributed between hosts.
+	For Envoy, this would be done by the control plane, which is able to adjust the load applied to individual endpoints 
+	by specifying various parameters, such as priority, locality weight, endpoint weight and endpoint health.
+
+Both Distributed and Global:Recommended
